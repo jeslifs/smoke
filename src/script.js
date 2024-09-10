@@ -14,7 +14,7 @@ const textureLoader = new THREE.TextureLoader()
  * Base
  */
 // Debug
-const gui = new GUI()
+// const gui = new GUI()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -45,7 +45,7 @@ noise.wrapT = THREE.RepeatWrapping
 
 // Material
 const smokeMaterial = new THREE.ShaderMaterial({
-    wireframe: true,
+    // wireframe: true,
     vertexShader: Vertex,
     fragmentShader: Fragment,
     side: THREE.DoubleSide,
@@ -54,7 +54,8 @@ const smokeMaterial = new THREE.ShaderMaterial({
         uTime: new THREE.Uniform(0),
         uPerlinTexture: new THREE.Uniform(noise),
     },
-    transparent: true
+    transparent: true,
+    depthWrite: false
 })
 
 // Mesh
