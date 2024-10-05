@@ -3,12 +3,13 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 import Vertex from './shaders/coffeeSmoke/vertex.glsl'
 import Fragment from './shaders/coffeeSmoke/fragment.glsl'
-
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
 /**
  * Loaders
  */
 const textureLoader = new THREE.TextureLoader()
+const gltfLoader = new GLTFLoader()
 
 /**
  * Base
@@ -107,6 +108,19 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+/**
+ * Model
+ */
+gltfLoader.load(
+    './bakedModel.glb',
+    (gltf) =>
+    {
+        gltf.scene.getObjectByName('baked').material.map.anisotropy = 8
+        gltf.scene.position.y = -3.5
+        scene.add(gltf.scene)
+    }
+)
 
 /**
  * Animate
